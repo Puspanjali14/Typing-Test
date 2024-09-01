@@ -15,7 +15,7 @@ A responsive typing speed web app built with **HTML**, **Tailwind CSS**, and **J
 - **HTML:** Structure of the web app.
 - **Tailwind CSS:** For styling and responsive design.
 - **JavaScript:** Handles the logic for typing tests, accuracy calculation, and dynamic content updates.
-- **Random Paragraph Generator:** Provides a variety of paragraphs for each typing test.
+
 
 ## Usage
 
