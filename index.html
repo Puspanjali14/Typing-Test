@@ -3,111 +3,94 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Puspanjali Typing Test</title>
   <script src="script.js" defer></script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <style>
-    /* Custom CSS for additional styling */
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #6b6179; /* Light Sky Blue */
-      color: #000000; /* Dark Black */
+    /* Custom styles for light mode and dark mode */
+    .dark .dark-mode-text {
+      color: rgb(20, 17, 17);
     }
-
-    #test-area {
-      background-color: #ffffff;
-      color: #000000; /* Dark Black */
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    .dark .dark-mode-bg {
+      background-color: #1a202c;
     }
-
-    #input-area {
-      background-color: #f0f8ff; /* Light blue for input field */
-      color: #000000; /* Dark Black */
-    }
-
-    .icon {
-      color: #4030d2;
-      margin-right: 8px;
-    }
-
-    .correct {
-  color: #000000; /* Dark Black */
-}
-
-.incorrect {
-  color: #ff0000; /* Red */
-  text-decoration: underline;
-}
-.dark-mode {
-  background-color: #333;
-  color: #f0f0f0;
-}
-
-.dark-mode #text-display {
-  background-color: #252424;
-  color: #f0f0f0;
-}
-
-
-    #title {
-      font-size: 3rem;
-      font-weight: bold;
-      color: #000000; /* Dark Black */
-      margin-bottom: 20px;
-    }
-
-    #stats p {
-      margin-top: 10px;
-    }
-
-    #text-display {
-      margin-top: 20px;
-      font-size: 1.5rem;
-      font-weight: 500;
-    }
-
-    #time-selection {
-      margin-bottom: 20px;
-      font-size: 1rem;
-    }
-
-    #restart-btn {
-      margin-top: 20px;
+    .dark .light-mode-bg {
+      background-color: #111212;
     }
   </style>
 </head>
-<body class="flex items-center justify-center h-screen">
-  <div class="w-3/4 text-center">
-    <h1 id="title"><i class="fas fa-keyboard icon"></i>PTyping Test</h1>
-    
-    <!-- Time Selection Dropdown -->
-    <div id="time-selection" class="mb-4">
-      <label for="time-limit" class="mr-2">Choose Time:</label>
-      <select id="time-limit" class="p-2 rounded-lg">
-        <option value="15">15 seconds</option>
-        <option value="30">30 seconds</option>
-        <option value="60">1 minute</option>
-      </select>
-    </div>
-
-    <div id="test-area" class="p-6 rounded-lg shadow-md mb-8">
-      <textarea id="input-area" class="mt-4 w-full h-24 p-2 rounded-lg" placeholder="Start typing here..."></textarea>
-      <p id="text-display" class="text-lg leading-relaxed mt-6">HELLO WELCOME! PLEASE CLICK RESTART </p>
-    </div>
-    
-
-
-    
-    <!-- Restart Button -->
-    <button id="restart-btn" class="p-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600">Restart</button>
-    
-    <div id="stats" class="text-lg mt-4">
-      <p><i class="fas fa-clock icon"></i>Time: <span id="timer">60</span> seconds</p>
-      <p><i class="fas fa-tachometer-alt icon"></i>Words per Minute: <span id="wpm">0</span></p>
-      <p><i class="fas fa-percentage icon"></i>Accuracy: <span id="accuracy">100%</span></p>
-    </div>
+<body class="bg-gray-100 text-blue-900 transition duration-300 dark:bg-gray-900 dark:text-gray-100">
+  
+  <!-- Dark Mode Toggle Button -->
+  <div class="flex justify-center mt-4">
+    <button id="dark-mode-btn" class="bg-green-600 text-white px-4 py-2 rounded shadow hover:bg-blue-800 transition">Toggle Dark Mode</button>
   </div>
+
+  <!-- Header Section -->
+  <header class="text-center mt-8">
+    <h1 class="text-4xl font-bold">Puspanjali Typing Test</h1>
+    <p class="text-lg mt-2">Test your typing speed and accuracy!</p>
+  </header>
+
+  <!-- Main Typing Test Section -->
+  <main class="flex flex-col items-center mt-10 space-y-6 w-full max-w-3xl mx-auto">
+
+    <!-- Display Area for Paragraph -->
+    <div id="text-display" class="bg-white dark:bg-gray-700 dark:text-gray-100 p-6 rounded-lg shadow-lg w-full text-lg leading-relaxed dark:text-gray-900"></div>
+
+    <!-- Input Area for Typing -->
+    <textarea id="input-area" class="w-full h-24 p-4 text-lg rounded-lg shadow-lg focus:outline-none bg-blue-100 dark:bg-gray-600 dark:text-gray-200" placeholder="Start typing here..." autofocus></textarea>
+
+    <!-- Timer, WPM, and Accuracy -->
+    <div class="flex justify-between w-full">
+      <div class="text-lg"><i class="fas fa-clock mr-2"></i>Time left: <span id="timer">60</span> seconds</div>
+      <div class="text-lg"><i class="fas fa-tachometer-alt mr-2"></i>WPM: <span id="wpm">0</span></div>
+      <div class="text-lg"><i class="fas fa-percentage mr-2"></i>Accuracy: <span id="accuracy">100</span>%</div>
+    </div>
+
+    <!-- Buttons for Restart and Time Limit Selection -->
+    <div class="flex justify-between items-center w-full space-x-4">
+      <div class="flex items-center">
+        <label for="time-limit" class="mr-2 text-lg">Choose Time:</label>
+        <select id="time-limit" class="p-2 rounded-lg bg-white dark:bg-gray-700 dark:text-gray-200">
+          <option value="15">15 seconds</option>
+          <option value="30">30 seconds</option>
+          <option value="60">1 minute</option>
+        </select>
+      </div>
+      <button id="restart-btn" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition">Restart Test</button>
+    </div>
+
+    <!-- Countdown Display -->
+    <div id="countdown-display" class="text-lg text-red-500"></div>
+
+   
+
+    <!-- Text Size Adjustment -->
+    <div class="flex justify-between w-full space-x-4">
+      <button id="increase-text-size-btn" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600 transition">Increase Text Size</button>
+      <button id="decrease-text-size-btn" class="bg-red-500 text-white px-4 py-2 rounded-lg shadow hover:bg-red-600 transition">Decrease Text Size</button>
+    </div>
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="text-center mt-8">
+    <p>&copy; 2024 Puspanjali Neupane. All rights reserved.</p>
+  </footer>
+   <script>
+    const darkModeBtn = document.getElementById('dark-mode-btn');
+    const body = document.body;
+
+    darkModeBtn.addEventListener('click', () => {
+      body.classList.toggle('dark');
+      // Toggle specific classes for dark mode
+      body.classList.toggle('bg-gray-100');
+      body.classList.toggle('bg-gray-800');
+      body.classList.toggle('text-gray-900');
+      body.classList.toggle('text-gray-100');
+    });
+  </script>
 </body>
 </html>
